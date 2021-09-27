@@ -1,0 +1,126 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  background: $theme;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+
+  .login-container {
+    width: 60%;
+    height: 55%;
+    background: $backgroundColor;
+    border-radius: 10px;
+    box-shadow: 0 0 30px $subTheme;
+    animation: enter .3s ease-in-out;
+    display: flex;
+
+    .reveal {
+      flex: 1;
+      background: url("../../assets/svg/login.svg") no-repeat center;
+      background-size: auto;
+      text-align: center;
+
+      h1 {
+        color: $subTheme;
+        padding: 30px;
+        font-size: 36px;
+      }
+    }
+
+    .form-container {
+      flex: 1;
+      text-align: center;
+
+      h1 {
+        color: $subTheme;
+        padding: 30px;
+        font-size: 36px;
+        font-weight: 1000;
+      }
+
+      .form {
+        width: 100%;
+        padding: 30px 10%;
+
+        .numberInput {
+          font-weight: 1000;
+          height: 50px;
+          font-size: 18px;
+          letter-spacing: 1.5px;
+          margin-bottom: 40px;
+          border-radius: 5px;
+          color: $textColor;
+          background-color: $subBackgroundColor;
+        }
+
+        .passwordInput {
+          height: 50px;
+          margin-bottom: 40px;
+          background-color: $subBackgroundColor;
+
+          input {
+            font-weight: 1000;
+            font-size: 18px;
+            background-color: $subBackgroundColor;
+            border-radius: 5px;
+            color: $textColor;
+            letter-spacing: 1.5px;
+          }
+        }
+
+        .loginBtn {
+          height: 50px;
+          background: $subTheme;
+          color: white;
+          font-size: 18px;
+          border-color: transparent;
+          border-radius: 5px;
+        }
+      }
+
+      .iconArea {
+        padding: 0 10%;
+        display: flex;
+        justify-content: flex-end;
+
+        i {
+          margin-left: 30px;
+          font-size: 26px;
+          cursor: pointer;
+          color: $textColor;
+
+          &:hover {
+            color: $theme;
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes enter {
+    0% {
+      transform: translateY(-100px) rotate(-45deg) scale(.2);
+    }
+    100% {
+      transform: translate(0) rotate(0) scale(1);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .reveal {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .reveal {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+}

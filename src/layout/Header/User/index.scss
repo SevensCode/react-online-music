@@ -1,0 +1,80 @@
+.user {
+  position: relative;
+
+  .ant-avatar {
+    cursor: pointer;
+  }
+
+  .user-no-login {
+    position: absolute;
+    left: -250px;
+    top: 40px;
+    width: 300px;
+    height: 170px;
+    background: $backgroundColor;
+    box-shadow: 0 2px 6px rgba(128, 128, 128, 0.15);
+    padding: 10px;
+    display: none;
+
+    &.fadeIn {
+      display: block;
+      animation: fadeIn .2s ease-in;
+      transform-origin: top;
+    }
+
+    .title {
+      text-align: center;
+      color: $theme;
+    }
+
+    .user-info-intro {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: $textColor;
+
+        i {
+          color: $theme;
+          font-size: 20px;
+        }
+      }
+    }
+
+    .user-info-action {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+
+      button {
+        border-radius: 100px;
+        border-color: transparent;
+
+        &:hover {
+          border-color: transparent;
+        }
+      }
+
+      button:first-child {
+        background-color: $theme;
+        color: white;
+      }
+    }
+  }
+}
+
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(.5) translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
