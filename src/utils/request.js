@@ -17,6 +17,13 @@ server.interceptors.request.use(data => {
 })
 
 server.interceptors.response.use(({ data }) => {
+    if (data.code === 301) {
+        Message.error('无权限访问')
+        return { error: true }
+    } else if (data.code !== 200) {
+        Message.error('系统错误')
+        return { error: true }
+    }
     return data
 }, error => {
     let { message } = error

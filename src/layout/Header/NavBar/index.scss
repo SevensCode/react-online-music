@@ -3,9 +3,9 @@
   display: flex;
   align-items: center;
   position: relative;
+  gap: 30px;
 
   a {
-    margin: 0 20px;
     color: $textColor;
     font-size: 17px;
     overflow: hidden;

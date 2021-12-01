@@ -5,6 +5,7 @@ import Login from '../views/Login'
 import NotFound from '../views/NotFound'
 
 function RouterConfig(props) {
+    console.log(props)
     return (
         <Switch>
             <Route exact path={ '/login' } component={ Login }/>

@@ -1,7 +1,7 @@
 .login {
   width: 100vw;
   height: 100vh;
-  background: $theme;
+  background: url("../../assets/image/login-bj.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,8 +13,7 @@
     height: 55%;
     background: $backgroundColor;
     border-radius: 10px;
-    box-shadow: 0 0 30px $subTheme;
-    animation: enter .3s ease-in-out;
+    box-shadow: 0 0 10px $subTheme;
     display: flex;
 
     .reveal {
@@ -54,11 +53,14 @@
           border-radius: 5px;
           color: $textColor;
           background-color: $subBackgroundColor;
+
+          &::placeholder {
+            font-weight: 500;
+          }
         }
 
         .passwordInput {
           height: 50px;
-          margin-bottom: 40px;
           background-color: $subBackgroundColor;
 
           input {
@@ -68,6 +70,23 @@
             border-radius: 5px;
             color: $textColor;
             letter-spacing: 1.5px;
+
+            &::placeholder {
+              font-weight: 500;
+            }
+          }
+        }
+
+        .rememberPhoneNumber {
+          width: 100%;
+          text-align: left;
+          height: 50px;
+          padding: 0 3px;
+          line-height: 50px;
+          color: $textColor;
+
+          .check {
+            margin-left: 5px;
           }
         }
 
@@ -99,15 +118,17 @@
       }
     }
   }
+}
 
-  @keyframes enter {
-    0% {
-      transform: translateY(-100px) rotate(-45deg) scale(.2);
-    }
-    100% {
-      transform: translate(0) rotate(0) scale(1);
-    }
-  }
+.enter-appear {
+  opacity: 0;
+  transform: translateY(0) scale(1.2);
+}
+
+.enter-appear-active, .enter-appear-done {
+  opacity: 1;
+  transition: .3s ease-in-out;
+  transform: translate(0) scale(1);
 }
 
 @media (max-width: 768px) {

@@ -1,12 +1,13 @@
-.header {
+.header-container {
   height: 60px;
   box-shadow: 0 1px 5px rgba(138, 137, 137, 0.15);
-  display: flex;
-  align-items: center;
-  padding: 0 10%;
-  width: 100%;
-  justify-content: space-between;
   background: $backgroundColor;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-around;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   .left {
     height: 100%;
@@ -31,7 +32,18 @@
     .ant-switch-checked, .ant-switch {
       background: $subBackgroundColor;
     }
+  }
+}
+
+@media screen and (min-width: $screen-w) {
+  .header-container {
+    min-width: $w-n;
 
   }
 }
 
+@media screen and (max-width: $screen-w) {
+  .header-container {
+    min-width: $w-s;
+  }
+}

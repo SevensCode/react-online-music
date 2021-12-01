@@ -13,7 +13,7 @@ function Header(props) {
         store.set('theme', status ? 'dark' : 'light')
     }
     return (
-        <div className={ 'header' }>
+        <div className={ 'header-container' }>
             <div className="left">
                 <img className={ 'logo' } src={ require('../../assets/image/logo.png').default } alt=""/>
                 <NavBar/>

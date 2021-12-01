@@ -5,13 +5,15 @@ const darkTheme = {
     textColor: '#F5F6F7',
     subTextColor: '#d6d7d7',
     backgroundColor: '#242526',
-    subBackgroundColor: '#2e3236'
+    subBackgroundColor: '#2e3236',
+    scrollColor: 'rgba(255, 255, 255, 0.5)'
 }
 const lightTheme = {
     textColor: '#333333',
     subTextColor: '#606770',
     backgroundColor: '#ffffff',
-    subBackgroundColor: '#f2f2f2'
+    subBackgroundColor: '#f2f2f2',
+    scrollColor: 'rgba(0, 0, 0, 0.5)'
 }
 const { style } = document.querySelector('body')
 

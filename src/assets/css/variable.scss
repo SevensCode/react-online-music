@@ -5,4 +5,9 @@ $textColor: var(--textColor, #333333);
 $subTextColor: var(--subTextColor, #606770);
 $backgroundColor: var(--backgroundColor, white);
 $subBackgroundColor: var(--subBackgroundColor, #f2f2f2);
+$scrollColor: var(--scrollColor, rgba(0, 0, 0, 0.5));
 
+$shadow: 0 0 5px rgba(128, 128, 128, 0.47);
+$w-n: 1400px;
+$w-s: 1250px;
+$screen-w: 1400px;

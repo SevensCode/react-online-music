@@ -21,3 +21,72 @@ a {
 ul, ol, li {
   list-style: none;
 }
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: $scrollColor;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: $scrollColor;
+}
+
+.main {
+  position: relative;
+  margin: 0 auto;
+
+  .view-container {
+    width: 100%;
+  }
+}
+
+.module-title {
+  color: $textColor;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 0;
+  display: inline-block;
+
+  &:hover {
+    color: $theme;
+  }
+}
+
+@media screen and (min-width: $screen-w) {
+  .main {
+    width: $w-n;
+  }
+}
+
+@media screen and (max-width: $screen-w) {
+  .main {
+    width: $w-s;
+  }
+}
+
+.text-twoLinesHide {
+  display: -webkit-box; /*将对象转为弹性盒模型展示*/
+  -webkit-box-orient: vertical; /*设置弹性盒模型子元素的排列方式*/
+  -webkit-line-clamp: 2; /*限制文本行数*/
+  overflow: hidden; /*超出隐藏*/
+}
+
+.text-oneLinesHide {
+  display: -webkit-box; /*将对象转为弹性盒模型展示*/
+  -webkit-box-orient: vertical; /*设置弹性盒模型子元素的排列方式*/
+  -webkit-line-clamp: 1; /*限制文本行数*/
+  overflow: hidden; /*超出隐藏*/
+}
+
