@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { message as Message } from 'antd'
+import { getAuthCookie } from './cookies'
 
 const server = axios.create({
     baseURL: 'http://localhost:8999/',
@@ -9,8 +10,23 @@ const server = axios.create({
 server.interceptors.request.use(data => {
     // 防止 api 缓存
     const timestamp = new Date().getTime()
-    if (data.method === 'post') data.url = data.url + '/' + timestamp
-    if (data.method === 'get') data.params.timestamp = timestamp
+    if (data.method === 'post') {
+        data.url = data.url + '/' + timestamp
+        if (getAuthCookie()) {
+            if (data.data) {
+                data.data.cookie = getAuthCookie()
+            } else {
+                data.data = { cookie: getAuthCookie() }
+            }
+        }
+    } else {
+        if (data.params) {
+            data.params.timestamp = timestamp
+            data.params.cookie = getAuthCookie()
+        } else {
+            data.params = { timestamp, cookie: getAuthCookie() }
+        }
+    }
     return data
 }, error => {
     return Promise.reject(error)

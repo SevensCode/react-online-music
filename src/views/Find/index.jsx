@@ -1,6 +1,7 @@
 import React from 'react'
 import Banner from './Banner'
 import RecommendSongList from './RecommendSongList'
+import ExclusiveBroadcast from './ExclusiveBroadcast'
 
 function Find(props) {
     return (
@@ -9,6 +10,9 @@ function Find(props) {
             <Banner/>
             {/*推荐歌单*/ }
             <RecommendSongList/>
+            {/*独家放送*/ }
+            <ExclusiveBroadcast/>
+            {/*新歌*/ }
         </div>
     )
 }

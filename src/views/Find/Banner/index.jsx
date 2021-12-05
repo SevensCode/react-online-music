@@ -1,7 +1,10 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import './index.scss'
 import { getBanner } from '../../../api/common'
 import { useStateWithCallbackLazy } from '../../../hooks'
+import ImgLazy from '../../../components/ImgLazy'
+
+let time = null
 
 function Banner(props) {
     const immutableState = useRef({
@@ -20,12 +23,12 @@ function Banner(props) {
         next: 1,
         // 上个
         prve: 1,
-        time: null
     })
     const auto = (state) => {
         const length = state.banners.length - 1
         const { current } = immutableState
-        state.time = setInterval(() => {
+
+        time = setInterval(() => {
             setState({
                 ...state,
                 active: current.active === length ? current.active = 0 : current.active += 1,
@@ -34,17 +37,16 @@ function Banner(props) {
             })
         }, 3000)
     }
-    const actionSlider = useCallback((type, state) => {
+    const actionSlider = (type, state) => {
         if (type === 'auto') {
             auto(state)
             return true
         }
         setState(({ active, next, prve, banners }) => {
             const length = banners.length - 1
-            clearInterval(state.time)
+            clearInterval(time)
             switch (type) {
                 case 'next':
-                    clearInterval(state.time)
                     active = active === length ? 0 : active + 1
                     next = next === length ? 0 : next + 1
                     prve = prve === length ? 0 : prve + 1
@@ -59,10 +61,9 @@ function Banner(props) {
             immutableState.current.active = active
             immutableState.current.next = next
             immutableState.current.prve = prve
-            return { ...state, active, next, prve }
+            return { ...state, active, next, prve, time: null }
         }, () => auto(state))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }
     useEffect(() => {
         getBanner().then(({ banners }) => {
             console.log(banners)
@@ -71,7 +72,7 @@ function Banner(props) {
                 actionSlider('auto', state)
             })
         })
-        return () => clearInterval(state.time)
+        return () => clearInterval(time)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const handleButPrevious = () => {
@@ -80,21 +81,21 @@ function Banner(props) {
     const handleButNext = () => {
         actionSlider('next', state)
     }
-    const handleImgMouseMove = () => {
-        clearInterval(state.time)
+    const handleImgMouseEnter = () => {
+        clearInterval(time)
     }
     const handleImgMouseOut = () => {
         auto(state)
     }
-    const handleIndicatorMouseMove = (i) => {
+    const handleIndicatorMouseEnter = (i) => {
         const length = state.banners.length - 1
         const { current } = immutableState
-        clearInterval(state.time)
+        clearInterval(time)
         setState({
             ...state,
             active: current.active = i,
             next: i === length ? current.next = 0 : current.next = i + 1,
-            prve: current.prve = i - 1
+            prve: current.prve = i - 1 === -1 ? length : i - 1
         })
     }
     const handleIndicatorMouseOut = () => {
@@ -115,12 +116,10 @@ function Banner(props) {
         <div className="slider-container ">
             <div className="slider-box">
                 <div className="slider-content">
-                    { state.banners.map((item, i) => <div className={ [ 'slider', matchClassName(i) ].join(' ') }
-                                                          key={ i }>
-                        <img onMouseMove={ handleImgMouseMove } onMouseOut={ handleImgMouseOut }
-                             src={ item.imageUrl }
-                             alt=""/>
-                    </div>) }
+                    { state.banners.map((item, i) =>
+                        <div className={ [ 'slider', matchClassName(i) ].join(' ') } key={ i }>
+                            <ImgLazy onMouseOut={ handleImgMouseOut } onMouseEnter={ handleImgMouseEnter } src={ item.imageUrl }/>
+                        </div>) }
                 </div>
                 <span onClick={ handleButPrevious } className={ 'icon-previous' }><i
                     className={ 'iconfont icon-shangyiye' }/></span>
@@ -130,7 +129,7 @@ function Banner(props) {
             <div className="indicator">
                 { state.banners.map((value, index) => <i
                     className={ state.active === index ? 'active' : '' }
-                    onMouseMove={ () => handleIndicatorMouseMove(index) }
+                    onMouseEnter={ () => handleIndicatorMouseEnter(index) }
                     onMouseOut={ () => handleIndicatorMouseOut(index) }
                     key={ index }/>) }
             </div>

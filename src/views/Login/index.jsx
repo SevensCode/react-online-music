@@ -8,7 +8,7 @@ import { setDarkTheme, setLightTheme } from '../../theme'
 import { useDispatch } from 'react-redux'
 import { removeUserinfo, setUserinfo } from '../../redux/modules/user'
 import Checkbox from 'antd/es/checkbox/Checkbox'
-import { getPhoneCookie, removePhoneCookie, setPhoneCookie } from '../../utils/cookies'
+import { getPhoneCookie, removePhoneCookie, setAuthCookie, setPhoneCookie } from '../../utils/cookies'
 import { CSSTransition } from 'react-transition-group'
 
 const Login = (props) => {
@@ -43,8 +43,9 @@ const Login = (props) => {
         if (!password) return message.error('请输入密码！')
         if (!reg.test(phone)) return message.error('请输入规范的手机号！')
         setStatus({ ...status, loading: true })
-        const { profile, code } = await logInWithPhone(form).finally(() => setStatus({ ...status, loading: false }))
+        const { profile, code, cookie } = await logInWithPhone(form).finally(() => setStatus({ ...status, loading: false }))
         if (code !== 200) return message.error('账号或密码错误！')
+        setAuthCookie(cookie)
         // 储存 用户信息
         dispatch(setUserinfo(profile))
         // 判断是否记住手机号
@@ -70,15 +71,22 @@ const Login = (props) => {
                         <div className="form">
                             <Input defaultValue={ form.phone }
                                    onChange={ e => setForm({ ...form, phone: e.target.value }) }
-                                   className={ 'numberInput' } placeholder={ '请输入手机号' }/>
+                                   className={ 'numberInput' }
+                                   placeholder={ '请输入手机号' }/>
                             <Input.Password onChange={ e => setForm({ ...form, password: e.target.value }) }
                                             className={ 'passwordInput' } placeholder={ '请输入密码' }/>
                             <div className={ 'rememberPhoneNumber' }>
-                                记住手机号<Checkbox className={ 'check' } defaultChecked={ status.isRememberMobileNumber }
-                                               onChange={ isRememberPhoneNumber }/>
+                                记住手机号
+                                <Checkbox
+                                    className={ 'check' }
+                                    defaultChecked={ status.isRememberMobileNumber }
+                                    onChange={ isRememberPhoneNumber }/>
                             </div>
-                            <Button onClick={ login } loading={ status.loading } className={ 'loginBtn' }
-                                    block>登录</Button>
+                            <Button
+                                onClick={ login }
+                                loading={ status.loading }
+                                className={ 'loginBtn' }
+                                block>登录</Button>
                         </div>
                         <div className={ 'iconArea' }>
                             <i onClick={ history.goBack } className={ 'iconfont icon-rollback' }/>

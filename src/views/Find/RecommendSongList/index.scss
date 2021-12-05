@@ -1,7 +1,26 @@
-.cardGroup {
+.recommendSongList {
   width: 100%;
-  display: flex;
-  gap: 10px 20px;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+  .songList-cardGroup {
+    width: 100%;
+    display: grid;
+    gap: 10px 20px;
+    justify-content: space-between;
+    padding: 5px;
+  }
+}
+
+
+@media screen and (min-width: $w-n) {
+  .songList-cardGroup {
+    grid-template-columns: repeat(6, 215px);
+    grid-template-rows: repeat(5, calc(215px + 50px));
+  }
+}
+
+@media screen and (max-width: $w-n) {
+  .songList-cardGroup {
+    grid-template-columns: repeat(6, 190px);
+    grid-template-rows: repeat(5, calc(190px + 50px));
+  }
 }

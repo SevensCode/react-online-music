@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import GraphicCard from '../../../components/GraphicCard'
-import { getRecommendedSonglist } from '../../../api/find'
+import { getRecommendedSonglist } from '../../../api/songList'
 import './index.scss'
 
 function RecommendSongList(props) {
-    const [ songList, setSongList ] = useState([])
+    const [ list, setList ] = useState([])
+
     useEffect(() => {
-        const recommendedSonglist = async () => {
-            const { result, error } = await getRecommendedSonglist()
+        // 获取推荐歌单
+        getRecommendedSonglist().then(({ result, error }) => {
             if (error) return
-            setSongList(result)
-        }
-        recommendedSonglist()
+            setList(result)
+        })
     }, [])
 
-    return (<div>
+    return (<div className={ 'recommendSongList' }>
         <span className="module-title">推荐歌单></span>
-        <div className="cardGroup">
-            { songList.map(value => <GraphicCard
-                key={ value.id }
-                title={ value.name }
-                imgUrl={ value.picUrl }
-                playVolume={ value.playCount }
+        <div className="songList-cardGroup">
+            { list.map(({ id, name, picUrl, playCount }) => <GraphicCard
+                key={ id }
+                title={ name }
+                imgUrl={ picUrl }
+                playCount={ playCount }
             />) }
         </div>
     </div>)

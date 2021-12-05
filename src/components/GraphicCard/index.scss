@@ -1,17 +1,19 @@
 .graphicCard {
   display: inline-flex;
   flex-direction: column;
-  width: 200px;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
 
   .graphicCard-imageArea {
     border-radius: 10px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 15px #333333;
-    margin-bottom: 5px;
-    width: 200px;
-    height: 200px;
+    box-shadow: 0 0 10px rgba(121, 121, 121, 0.3);
+    width: 100%;
+    height: 100%;
+    flex: 1;
 
     &:hover {
       img {
@@ -29,14 +31,15 @@
 
     .graphicCard-playVolume {
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 5px;
+      top: 5px;
       display: flex;
       align-items: center;
       color: white;
-      border-radius: 5px;
+      border-radius: 10px;
       padding: 0 5px;
       font-size: 12px;
+      background: rgba(0, 0, 0, .5);
     }
 
     &:hover .graphicCard-playBtn {
@@ -67,9 +70,12 @@
 
   .graphicCard-title {
     font-size: 14px;
+    padding-top: 5px;
+    height: 50px;
     color: $subTextColor;
     transition: .5s ease-out;
     cursor: pointer;
+    margin: 0;
 
     &:hover {
       color: $textColor;

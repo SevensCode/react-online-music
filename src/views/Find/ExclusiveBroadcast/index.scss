@@ -1,0 +1,28 @@
+.exclusiveBroadcast {
+  width: 100%;
+
+  .exclusiveBroadcast-cardGroup {
+    width: 100%;
+    display: grid;
+    gap: 10px 20px;
+
+    justify-content: space-between;
+    padding: 5px;
+  }
+}
+
+@media screen and (min-width: $w-n) {
+
+  .exclusiveBroadcast-cardGroup {
+    grid-template-columns: repeat(3, 450px);
+    grid-template-rows: repeat(1, calc(253px + 50px));
+  }
+}
+
+@media screen and (max-width: $w-n) {
+
+  .exclusiveBroadcast-cardGroup {
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: repeat(1, calc(225px + 50px));
+  }
+}

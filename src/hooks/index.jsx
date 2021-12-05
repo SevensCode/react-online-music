@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { debounce, throttle } from 'lodash/function'
 
 /**
  * 点击其他元素改变状态
@@ -39,3 +40,16 @@ export const useStateWithCallbackLazy = initialState => {
     }
     return [ state, setValueWithCallback ]
 }
+
+/**
+ * 防抖 hook
+ * @param {function} callback - 回调函数
+ * @param {number} wait - 毫秒
+ * */
+export const useDebounce = (callback, wait) => useCallback(debounce(callback, wait), []) // eslint-disable-line react-hooks/exhaustive-deps
+/**
+ * 节流 hook
+ * @param {function} callback - 回调函数
+ * @param {number} wait - 毫秒
+ * */
+export const useThrottle = (callback, wait) => useCallback(throttle(callback, wait), []) // eslint-disable-line react-hooks/exhaustive-deps

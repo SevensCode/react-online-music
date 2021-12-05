@@ -92,7 +92,7 @@
   }
 }
 
-@media screen and (min-width: $screen-w) {
+@media screen and (min-width: $w-n) {
   .slider-container {
     width: $w-n;
     height: 480px;
@@ -119,7 +119,7 @@
   }
 }
 
-@media screen and (max-width: $screen-w) {
+@media screen and (max-width: $w-n) {
   .slider-container {
     width: $w-s;
     height: 442px;
