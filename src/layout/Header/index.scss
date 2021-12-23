@@ -1,49 +1,50 @@
 .header-container {
-  height: 60px;
-  box-shadow: 0 1px 5px rgba(138, 137, 137, 0.15);
-  background: $backgroundColor;
-  max-width: 100%;
-  display: flex;
-  justify-content: space-around;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  .left {
-    height: 100%;
+    height: 60px;
+    box-shadow: 0 1px 5px rgba(138, 137, 137, 0.15);
+    background: $transparentBackground;
+    backdrop-filter: saturate(180%) blur(30px);
+    max-width: 100%;
     display: flex;
-
-    .logo {
-      user-select: none;
-      height: 100%;
-      margin-right: 20px;
+    justify-content: space-around;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    
+    .left {
+        height: 100%;
+        display: flex;
+        
+        .logo {
+            user-select: none;
+            height: 100%;
+            margin-right: 20px;
+        }
     }
-  }
-
-  .right {
-    height: 100%;
-    display: flex;
-    align-items: center;
-
-    .themeSwitching {
-      margin: 0 25px;
+    
+    .right {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        
+        .themeSwitching {
+            margin: 0 25px;
+        }
+        
+        .ant-switch-checked, .ant-switch {
+            background: $subBackgroundColor;
+        }
     }
-
-    .ant-switch-checked, .ant-switch {
-      background: $subBackgroundColor;
-    }
-  }
 }
 
 @media screen and (min-width: $w-n) {
-  .header-container {
-    min-width: $w-n;
-
-  }
+    .header-container {
+        min-width: $w-n;
+        
+    }
 }
 
 @media screen and (max-width: $w-n) {
-  .header-container {
-    min-width: $w-s;
-  }
+    .header-container {
+        min-width: $w-s;
+    }
 }

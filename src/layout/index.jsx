@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Redirect, Route, useHistory } from 'react-router-dom'
 import Find from '../views/Find'
 import Header from './Header'
@@ -6,21 +6,34 @@ import Footer from './Footer'
 import NotFound from '../views/NotFound'
 import './index.scss'
 import Leaderboard from '../views/Leaderboard'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { message } from 'antd'
 import AnmatedSwitch from '../animation/AnmatedSwitch'
-
+import { getUserLikeMusicId } from '../api/user'
+import { setLikeIds } from '../redux/modules/user'
+import MusicPlayer from './MusicControls/MusicPlayer'
+import { CSSTransition } from 'react-transition-group'
+// 需要认证的 path
+const authPath = [ '/user' ]
 
 function Layout(props) {
-    const authPath = useRef([ '/user' ])
     const userinfo = useSelector(state => state.user.userinfo)
+    const musicInfo = useSelector(state => state.global.musicInfo)
+    const dispatch = useDispatch()
     const history = useHistory()
     useEffect(() => {
-        if (authPath.current.includes(props.location.pathname) && !userinfo) {
+        if (authPath.includes(props.location.pathname) && !userinfo) {
             message.info('登录后可访问！')
             history.push('/login')
         }
     }, [ props.location, userinfo, history ])
+    useEffect(() => {
+        if (userinfo) getUserLikeMusicId(userinfo.userId).then(({ ids, error }) => {
+            if (error) message.error('??有问题')
+            dispatch(setLikeIds(ids))
+        })
+
+    }, [ dispatch, userinfo ])
     return (
         <div className={ 'layout' }>
             <Header/>
@@ -33,6 +46,9 @@ function Layout(props) {
                 </AnmatedSwitch>
             </div>
             <Footer/>
+            <CSSTransition unmountOnExit in={ !!musicInfo.id } classNames="bottomLineIn" timeout={ 300 }>
+                <MusicPlayer/>
+            </CSSTransition>
         </div>
     )
 }

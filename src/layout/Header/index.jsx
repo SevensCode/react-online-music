@@ -15,7 +15,7 @@ function Header(props) {
     return (
         <div className={ 'header-container' }>
             <div className="left">
-                <img className={ 'logo' } src={ require('../../assets/image/logo.png').default } alt=""/>
+                {/*<img className={ 'logo' } src={ require('../../assets/image/logo.png').default } alt=""/>*/ }
                 <NavBar/>
             </div>
             <div className="right">

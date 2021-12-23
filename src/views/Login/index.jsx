@@ -8,7 +8,7 @@ import { setDarkTheme, setLightTheme } from '../../theme'
 import { useDispatch } from 'react-redux'
 import { removeUserinfo, setUserinfo } from '../../redux/modules/user'
 import Checkbox from 'antd/es/checkbox/Checkbox'
-import { getPhoneCookie, removePhoneCookie, setAuthCookie, setPhoneCookie } from '../../utils/cookies'
+import { getPhoneCookie, removePhoneCookie, setPhoneCookie } from '../../utils/cookies'
 import { CSSTransition } from 'react-transition-group'
 
 const Login = (props) => {
@@ -43,9 +43,9 @@ const Login = (props) => {
         if (!password) return message.error('请输入密码！')
         if (!reg.test(phone)) return message.error('请输入规范的手机号！')
         setStatus({ ...status, loading: true })
-        const { profile, code, cookie } = await logInWithPhone(form).finally(() => setStatus({ ...status, loading: false }))
+        const { profile, code } = await logInWithPhone(form).finally(() => setStatus({ ...status, loading: false }))
         if (code !== 200) return message.error('账号或密码错误！')
-        setAuthCookie(cookie)
+        // setAuthCookie(cookie)
         // 储存 用户信息
         dispatch(setUserinfo(profile))
         // 判断是否记住手机号

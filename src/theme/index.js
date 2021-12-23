@@ -6,14 +6,18 @@ const darkTheme = {
     subTextColor: '#d6d7d7',
     backgroundColor: '#242526',
     subBackgroundColor: '#2e3236',
-    scrollColor: 'rgba(255, 255, 255, 0.5)'
+    scrollColor: 'rgba(255, 255, 255, 0.5)',
+    transparent: 'rgba(255, 255, 255, 0.1)',
+    transparentBackground: 'rgba(36,37,38,.7)',
 }
 const lightTheme = {
     textColor: '#333333',
     subTextColor: '#606770',
     backgroundColor: '#ffffff',
     subBackgroundColor: '#f2f2f2',
-    scrollColor: 'rgba(0, 0, 0, 0.5)'
+    scrollColor: 'rgba(0, 0, 0, 0.5)',
+    transparent: 'rgba(0, 0, 0, 0.1)',
+    transparentBackground: 'rgba(255,255,255,.7)',
 }
 const { style } = document.querySelector('body')
 

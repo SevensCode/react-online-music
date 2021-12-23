@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import './index.scss'
 import { getBanner } from '../../../api/common'
 import { useStateWithCallbackLazy } from '../../../hooks'
-import ImgLazy from '../../../components/ImgLazy'
+import LazyLoad from 'react-lazyload'
 
 let time = null
 
@@ -66,10 +66,9 @@ function Banner(props) {
     }
     useEffect(() => {
         getBanner().then(({ banners }) => {
-            console.log(banners)
             setState({ ...state, banners, prve: banners.length - 1 }, state => {
                 immutableState.current.prve = banners.length - 1
-                actionSlider('auto', state)
+                // actionSlider('auto', state)
             })
         })
         return () => clearInterval(time)
@@ -118,7 +117,9 @@ function Banner(props) {
                 <div className="slider-content">
                     { state.banners.map((item, i) =>
                         <div className={ [ 'slider', matchClassName(i) ].join(' ') } key={ i }>
-                            <ImgLazy onMouseOut={ handleImgMouseOut } onMouseEnter={ handleImgMouseEnter } src={ item.imageUrl }/>
+                            <LazyLoad once>
+                                <img onMouseEnter={ handleImgMouseEnter } onMouseOut={ handleImgMouseOut } src={ item.imageUrl } alt=""/>
+                            </LazyLoad>
                         </div>) }
                 </div>
                 <span onClick={ handleButPrevious } className={ 'icon-previous' }><i

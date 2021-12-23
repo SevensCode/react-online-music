@@ -1,0 +1,16 @@
+.authorTags {
+    font-size: 12px;
+    
+    span {
+        transition: .1s;
+    }
+    
+    .author:hover {
+        color: $subTheme;
+        cursor: pointer;
+    }
+    
+    strong {
+        margin: 0 5px;
+    }
+}

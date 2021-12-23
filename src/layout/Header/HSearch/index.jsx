@@ -28,7 +28,8 @@ function HSearch(props) {
                         <li><span className={ 'hotRecommended_index' }>10</span><p className={ 'hotRecommented_name' }>大苏打是打赏</p></li>
                     </ul>
                     <div className="searchHistory">
-                        <h3 className={ 'searchHistory_title' }><span>搜索历史</span><span>清空 <i className={ 'iconfont icon-top searchHistory_icon' }/></span></h3>
+                        <h3 className={ 'searchHistory_title' }><span>搜索历史</span><span>清空 <i
+                            className={ 'iconfont icon-top searchHistory_icon' }/></span></h3>
                         <div className={ 'searchHistory_list' }>
                             <span className={ 'searchHistory_item' }>周杰伦</span>
                             <span className={ 'searchHistory_item' }>sS ad a as </span>

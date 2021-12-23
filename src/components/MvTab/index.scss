@@ -1,0 +1,16 @@
+.mvTab {
+  padding: 0 3px;
+  border-radius: 6px;
+  border: 1px solid $subTheme;
+  font-size: 14px;
+  color: $subTheme;
+  margin: 0 5px;
+  cursor: pointer;
+
+  i {
+    font-size: 12px;
+    margin-left: 2px;
+    color: $subTheme;
+    font-weight: bold;
+  }
+}

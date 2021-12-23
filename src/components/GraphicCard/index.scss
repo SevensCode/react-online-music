@@ -6,11 +6,11 @@
   justify-content: space-between;
 
   .graphicCard-imageArea {
-    border-radius: 10px;
+    border-radius: $radius;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(121, 121, 121, 0.3);
+    //box-shadow: $shadow;
     width: 100%;
     height: 100%;
     flex: 1;
@@ -25,7 +25,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: $radius;
       transition: .5s ease-out;
     }
 
@@ -42,29 +42,15 @@
       background: rgba(0, 0, 0, .5);
     }
 
-    &:hover .graphicCard-playBtn {
+    &:hover .graphicCard-play {
       opacity: 1;
     }
 
-    .graphicCard-playBtn {
+    .graphicCard-play {
       position: absolute;
       right: 10px;
       bottom: 10px;
-      color: $subTheme;
       opacity: 0;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      transition: .5s ease-out;
-      background: white;
-
-      i {
-        font-size: 14px;
-        margin-left: 2px;
-      }
     }
   }
 
@@ -72,7 +58,7 @@
     font-size: 14px;
     padding-top: 5px;
     height: 50px;
-    color: $subTextColor;
+    color: $textColor;
     transition: .5s ease-out;
     cursor: pointer;
     margin: 0;

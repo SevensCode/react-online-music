@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react'
 import GraphicCard from '../../../components/GraphicCard'
 import './index.scss'
 import { exclusiveBroadcastEntryList } from '../../../api/exclusiveBroadcast'
-import { newSongExpress } from '../../../api/music'
 
 function ExclusiveBroadcast(props) {
     const [ list, setList ] = useState([])
     useEffect(() => {
-        newSongExpress(0)
         // 获取独家放送
         exclusiveBroadcastEntryList().then(({ result, error }) => {
             if (error) return true

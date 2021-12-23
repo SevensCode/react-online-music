@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { message as Message } from 'antd'
-import { getAuthCookie } from './cookies'
 
 const server = axios.create({
     baseURL: 'http://localhost:8999/',
-    timeout: 50000
+    timeout: 50000,
+    withCredentials: true
 })
 
 server.interceptors.request.use(data => {
@@ -12,19 +12,11 @@ server.interceptors.request.use(data => {
     const timestamp = new Date().getTime()
     if (data.method === 'post') {
         data.url = data.url + '/' + timestamp
-        if (getAuthCookie()) {
-            if (data.data) {
-                data.data.cookie = getAuthCookie()
-            } else {
-                data.data = { cookie: getAuthCookie() }
-            }
-        }
     } else {
         if (data.params) {
             data.params.timestamp = timestamp
-            data.params.cookie = getAuthCookie()
         } else {
-            data.params = { timestamp, cookie: getAuthCookie() }
+            data.params = { timestamp }
         }
     }
     return data

@@ -1,0 +1,17 @@
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    .volume-progressBar {
+        width: 100px;
+        
+        .ant-slider-handle {
+            border-color: $subTheme;
+        }
+        
+        .ant-slider-track {
+            background: $subTheme;
+        }
+    }
+}

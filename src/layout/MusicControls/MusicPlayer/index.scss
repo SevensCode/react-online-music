@@ -1,0 +1,107 @@
+#muiscPlayer {
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: $shadow;
+    background: $transparentBackground;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: saturate(180%) blur(30px);
+    
+    .musicPlayer {
+        display: flex;
+        padding: 10px 0;
+        height: 100%;
+        
+        .muiscPlayer-info {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex: .4;
+            gap: 10px;
+            
+            .muiscPlayer-coverPicture {
+                height: 100%;
+                width: 50px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            .musicPlayer-content {
+                flex: 1;
+                height: 50px;
+                color: $textColor;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                
+            }
+        }
+        
+        .musicPlayer-console {
+            flex: .2;
+        }
+        
+        .musicPlayer-otherAction {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            flex: .4;
+            
+            i, svg {
+                font-size: 20px;
+                color: $textColor;
+                cursor: pointer;
+                transition: .3s;
+                
+                &:hover {
+                    color: $subTheme;
+                }
+            }
+        }
+    }
+    
+    .muiscPlayer-progressBar {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        z-index: 10;
+        height: 2px;
+        
+        .ant-slider-handle {
+            border-color: $subTheme;
+        }
+        
+        .ant-slider-track {
+            background: $subTheme;
+            height: 2px;
+        }
+        
+        .ant-slider-rail {
+            height: 2px;
+            background: transparent;
+        }
+    }
+    
+    .muiscPlayer-musicStartTime, .muiscPlayer-musicEndTime {
+        color: $textColor;
+        font-weight: bold;
+        position: absolute;
+        top: 5px;
+    }
+    
+    .muiscPlayer-musicStartTime {
+        left: 10px;
+    }
+    
+    .muiscPlayer-musicEndTime {
+        right: 10px;
+    }
+}

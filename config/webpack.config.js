@@ -68,7 +68,7 @@ const hasJsxRuntime = (() => {
     if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
         return false
     }
-    
+
     try {
         require.resolve('react/jsx-runtime')
         return true
@@ -82,20 +82,20 @@ const hasJsxRuntime = (() => {
 module.exports = function (webpackEnv) {
     const isEnvDevelopment = webpackEnv === 'development'
     const isEnvProduction = webpackEnv === 'production'
-    
+
     // Variable used for enabling profiling in Production
     // passed into alias object. Uses a flag if passed into the build command
     const isEnvProductionProfile =
         isEnvProduction && process.argv.includes('--profile')
-    
+
     // We will provide `paths.publicUrlOrPath` to our app
     // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
     // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
     // Get environment variables to inject into our app.
     const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1))
-    
+
     const shouldUseReactRefresh = env.raw.FAST_REFRESH
-    
+
     // common function to get style loaders
     const getStyleLoaders = (cssOptions, preProcessor) => {
         const loaders = [
@@ -157,7 +157,7 @@ module.exports = function (webpackEnv) {
         }
         return loaders
     }
-    
+
     return {
         mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
         // Stop compilation early in production
@@ -289,7 +289,7 @@ module.exports = function (webpackEnv) {
                             : false,
                     },
                     cssProcessorPluginOptions: {
-                        preset: ['default', { minifyFontValues: { removeQuotes: false } }],
+                        preset: [ 'default', { minifyFontValues: { removeQuotes: false } } ],
                     },
                 }),
             ],
@@ -312,7 +312,7 @@ module.exports = function (webpackEnv) {
             // We placed these paths second because we want `node_modules` to "win"
             // if there are any conflicts. This matches Node resolution mechanism.
             // https://github.com/facebook/create-react-app/issues/253
-            modules: ['node_modules', paths.appNodeModules].concat(
+            modules: [ 'node_modules', paths.appNodeModules ].concat(
                 modules.additionalModulePaths || []
             ),
             // These are the reasonable defaults supported by the Node ecosystem.
@@ -370,7 +370,7 @@ module.exports = function (webpackEnv) {
                         // TODO: Merge this config once `image/avif` is in the mime-db
                         // https://github.com/jshttp/mime-db
                         {
-                            test: [/\.avif$/],
+                            test: [ /\.avif$/ ],
                             loader: require.resolve('url-loader'),
                             options: {
                                 limit: imageInlineSizeLimit,
@@ -382,7 +382,7 @@ module.exports = function (webpackEnv) {
                         // smaller than specified limit in bytes as data URLs to avoid requests.
                         // A missing `test` is equivalent to a match.
                         {
-                            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                            test: [ /\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/ ],
                             loader: require.resolve('url-loader'),
                             options: {
                                 limit: imageInlineSizeLimit,
@@ -407,7 +407,7 @@ module.exports = function (webpackEnv) {
                                         },
                                     ],
                                 ],
-                                
+
                                 plugins: [
                                     [
                                         require.resolve('babel-plugin-named-asset-import'),
@@ -452,7 +452,7 @@ module.exports = function (webpackEnv) {
                                 cacheDirectory: true,
                                 // See #6846 for context on why cacheCompression is disabled
                                 cacheCompression: false,
-                                
+
                                 // Babel sourcemaps are needed for debugging into node_modules
                                 // code.  Without the options below, debuggers like VSCode
                                 // show incorrect code and set breakpoints on the wrong lines.
@@ -515,7 +515,7 @@ module.exports = function (webpackEnv) {
                                 loader: 'sass-resources-loader',
                                 options: {
                                     // 这里是写全局 sass 文件路径
-                                    resources: [path.resolve(__dirname, './../src/assets/css/index.scss')],
+                                    resources: [ path.resolve(__dirname, './../src/assets/css/index.scss') ],
                                 }
                             }),
                             // Don't consider CSS imports dead code even if the
@@ -544,7 +544,7 @@ module.exports = function (webpackEnv) {
                                 loader: 'sass-resources-loader',
                                 options: {
                                     // 这里是写全局 sass 文件路径
-                                    resources: [path.resolve(__dirname, './../src/assets/css/index.scss')]
+                                    resources: [ path.resolve(__dirname, './../src/assets/css/index.scss') ]
                                 }
                             })
                         },
@@ -559,7 +559,7 @@ module.exports = function (webpackEnv) {
                             // its runtime that would otherwise be processed through "file" loader.
                             // Also exclude `html` and `json` extensions so they get processed
                             // by webpacks internal loaders.
-                            exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+                            exclude: [ /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/ ],
                             options: {
                                 name: 'static/media/[name].[hash:8].[ext]',
                             },
@@ -602,7 +602,7 @@ module.exports = function (webpackEnv) {
             // https://github.com/facebook/create-react-app/issues/5358
             isEnvProduction &&
             shouldInlineRuntimeChunk &&
-            new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
+            new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [ /runtime-.+[.]js/ ]),
             // Makes some environment variables available in index.html.
             // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
             // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
@@ -669,7 +669,7 @@ module.exports = function (webpackEnv) {
                     const entrypointFiles = entrypoints.main.filter(
                         fileName => !fileName.endsWith('.map')
                     )
-                    
+
                     return {
                         files: manifestFiles,
                         entrypoints: entrypointFiles,
@@ -689,7 +689,7 @@ module.exports = function (webpackEnv) {
             new WorkboxWebpackPlugin.InjectManifest({
                 swSrc,
                 dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
-                exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
+                exclude: [ /\.map$/, /asset-manifest\.json$/, /LICENSE/ ],
                 // Bump up the default maximum size (2mb) that's precached,
                 // to make lazy-loading failure scenarios less likely.
                 // See https://github.com/cra-template/pwa/issues/13#issuecomment-722667270
@@ -729,7 +729,7 @@ module.exports = function (webpackEnv) {
             !disableESLintPlugin &&
             new ESLintPlugin({
                 // Plugin options
-                extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+                extensions: [ 'js', 'mjs', 'jsx', 'ts', 'tsx' ],
                 formatter: require.resolve('react-dev-utils/eslintFormatter'),
                 eslintPath: require.resolve('eslint'),
                 failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
@@ -743,7 +743,7 @@ module.exports = function (webpackEnv) {
                 cwd: paths.appPath,
                 resolvePluginsRelativeTo: __dirname,
                 baseConfig: {
-                    extends: [require.resolve('eslint-config-react-app/base')],
+                    extends: [ require.resolve('eslint-config-react-app/base') ],
                     rules: {
                         ...(!hasJsxRuntime && {
                             'react/react-in-jsx-scope': 'error',

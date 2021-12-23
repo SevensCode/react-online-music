@@ -1,0 +1,10 @@
+.progressBar {
+    
+    &:hover .ant-slider-handle {
+        display: block;
+    }
+    
+    .ant-slider-handle {
+        display: none;
+    }
+}

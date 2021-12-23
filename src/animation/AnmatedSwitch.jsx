@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import './index.scss'
 
 function AnmatedSwitch(props) {
     const { children } = props

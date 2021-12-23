@@ -1,0 +1,27 @@
+.HotSinger {
+  width: 100%;
+
+  .HotSinger-group {
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 5px;
+  }
+}
+
+@media screen and (min-width: $w-n) {
+
+  .HotSinger-group {
+    grid-template-columns: repeat(6, 200px);
+    grid-template-rows: repeat(5, 230px);
+  }
+}
+
+@media screen and (max-width: $w-n) {
+
+  .HotSinger-group {
+    grid-template-columns: repeat(5, 200px);
+    grid-template-rows: repeat(6, 230px);
+  }
+}
