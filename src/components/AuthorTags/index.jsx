@@ -2,9 +2,9 @@ import React from 'react'
 import './index.scss'
 
 
-function AuthorTags({ data = [] }) {
+function AuthorTags({ data = [], className }) {
     return (
-        <span className="authorTags">
+        <span className={ [ 'authorTags', className ] }>
             { data.map((value, index) => {
                 if (index === data.length - 1) {
                     return <span className="author" key={ value.id }>{ value.name }</span>

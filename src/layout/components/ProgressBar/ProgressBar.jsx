@@ -1,7 +1,7 @@
 import React from 'react'
 import { Slider } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import { setDrag, updateCurrentPlayTime, updateSchedule } from '../../../redux/modules/global'
+import { setHasDragProgressBar, updateCurrentPlayTime, updateSchedule } from '../../../redux/modules/global'
 import { formattedSeconds, zeroPadding } from '../../../utils'
 import './index.scss'
 
@@ -12,7 +12,7 @@ function ProgressBar({ className }) {
     const dispatch = useDispatch()
     const onChange = (e) => {
         // 改拖拽为 true
-        dispatch(setDrag(true))
+        dispatch(setHasDragProgressBar(true))
         // 更新进度条
         dispatch(updateSchedule(e))
         // 更新播放显示时间
@@ -22,7 +22,7 @@ function ProgressBar({ className }) {
         // 更新audio播放时间
         audioInstance.currentTime = value
         // 改拖拽为 false
-        dispatch(setDrag(false))
+        dispatch(setHasDragProgressBar(false))
     }
     const tipFormatter = (value) => {
         const { minute, second } = formattedSeconds(value)

@@ -52,6 +52,31 @@
     transform-origin: top;
 }
 
+// 右侧缩放淡入淡出
+.rightZoomFade-enter {
+    opacity: 0;
+    transform: translateX(-10px) scale(.8);
+}
+
+.rightZoomFade-enter-active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    transform-origin: right;
+    transition: all .3s;
+}
+
+.rightZoomFade-exit {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.rightZoomFade-exit-active {
+    opacity: 0;
+    transform: translateX(10px) scale(.8);
+    transition: all .3s;
+    transform-origin: right;
+}
+
 // 底部划入
 .bottomLineIn-enter {
     opacity: 0;

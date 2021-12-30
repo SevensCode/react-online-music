@@ -69,6 +69,27 @@ ul, ol, li {
     }
 }
 
+.sub-module-title {
+    color: $textColor;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 0;
+    display: inline-block;
+    
+    &:hover {
+        color: $theme;
+    }
+}
+
+// 分割线
+.divder {
+    margin: 10px 0;
+    background: $divder;
+    height: 1px;
+    width: 100%;
+}
+
 @media screen and (min-width: $w-n) {
     .main {
         width: $w-n;

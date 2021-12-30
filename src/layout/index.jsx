@@ -13,12 +13,14 @@ import { getUserLikeMusicId } from '../api/user'
 import { setLikeIds } from '../redux/modules/user'
 import MusicPlayer from './MusicControls/MusicPlayer'
 import { CSSTransition } from 'react-transition-group'
+import PlayList from './PlayList'
 // 需要认证的 path
 const authPath = [ '/user' ]
 
 function Layout(props) {
     const userinfo = useSelector(state => state.user.userinfo)
     const musicInfo = useSelector(state => state.global.musicInfo)
+    const nowPlayingListDisplay = useSelector(state => state.global.nowPlayingListDisplay)
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect(() => {
@@ -46,6 +48,9 @@ function Layout(props) {
                 </AnmatedSwitch>
             </div>
             <Footer/>
+            <CSSTransition unmountOnExit in={ nowPlayingListDisplay } classNames="rightZoomFade" timeout={ 300 }>
+                <PlayList/>
+            </CSSTransition>
             <CSSTransition unmountOnExit in={ !!musicInfo.id } classNames="bottomLineIn" timeout={ 300 }>
                 <MusicPlayer/>
             </CSSTransition>

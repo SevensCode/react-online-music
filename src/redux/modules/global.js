@@ -28,10 +28,16 @@ export const audioPlay = createAsyncThunk('global/audioPlay', (payload, { dispat
     audioInstance.play().then((e) => dispatch(setPlayStatus(2)))
 })
 
+// 暂停
 export const audioPause = createAsyncThunk('global/audioPause', (payload, { dispatch, getState }) => {
     const { global: { audioInstance } } = getState()
     audioInstance.pause()
     dispatch(setPlayStatus(0))
+})
+
+// 下一首
+export const audioNextSong = createAsyncThunk('global/audioNextSong', (dispatch, getState) => {
+
 })
 
 const userSlice = createSlice({
@@ -43,6 +49,7 @@ const userSlice = createSlice({
             coverPicture: undefined,
             author: undefined,
             musicUrl: undefined,
+            duration: undefined,
             id: undefined
         },
         duration: 0,
@@ -64,33 +71,59 @@ const userSlice = createSlice({
         schedule: 0,
         audioInstance: new Audio(),
         // 是否拖拽进度条
-        isDrag: false
+        isDrag: false,
+        // 正在播放列表是否显示
+        nowPlayingListDisplay: false
     },
     reducers: {
+        // 设置音乐信息
         setMusicInfo(state, { payload }) {
             state.musicInfo = { ...payload, musicUrl: `https://music.163.com/song/media/outer/url?id=${ payload.id }.mp3` }
             state.startTime = { minute: 0, second: 0 }
         },
-        setSongList(state, { payload }) {
-            state.songList = payload
+        // 覆盖播放列表
+        overwritePlaylist(state, { payload }) {
+            state.playList = payload
         },
+        // 将音乐插入到播放列表
+        insertMusicIntoThePlaylist(state, { payload }) {
+            state.playList.songList.push(payload)
+        },
+        // 处理播放类型
         handlePlayType(state) {
-            state.playTypeStatus === 4 ? state.playTypeStatus = 0 : state.playTypeStatus += 1
+            let num = 3
+            if (state.playList.id) num = 4
+            state.playTypeStatus === num ? state.playTypeStatus = 0 : state.playTypeStatus += 1
         },
+        // 更新当前播放时间
         updateCurrentPlayTime(state, { payload }) {
             state.currentPlayTime = payload
         },
+        // 更新进度条
         updateSchedule(state, { payload }) {
             state.schedule = payload
         },
+        // 设置播放时长
         setDuration(state, { payload }) {
             state.duration = payload
         },
-        setDrag(state, { payload }) {
+        // 设置是否拖拽进度条
+        setHasDragProgressBar(state, { payload }) {
             state.isDrag = payload
         },
+        // 设置播放状态
         setPlayStatus(state, { payload }) {
             state.playStatus = payload
+        },
+        // 设置正在播放列表是否显示
+        setNowPlayingListDisplay(state, { payload }) {
+            state.nowPlayingListDisplay = payload
+        },
+        // 清空音乐信息和歌单
+        clearMusicInfoAndPlaylist(state) {
+            state.musicInfo = {}
+            state.playList.id = undefined
+            state.playList.songList = []
         }
     },
     extraReducers: {
@@ -104,13 +137,16 @@ const userSlice = createSlice({
 
 export const {
     setMusicInfo,
-    setSongList,
+    overwritePlaylist,
     handlePlayType,
     updateCurrentPlayTime,
     updateSchedule,
-    setDrag,
+    setHasDragProgressBar,
     setDuration,
-    setPlayStatus
+    setPlayStatus,
+    insertMusicIntoThePlaylist,
+    setNowPlayingListDisplay,
+    clearMusicInfoAndPlaylist
 } = userSlice.actions
 
 export default userSlice.reducer

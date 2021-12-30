@@ -1,0 +1,67 @@
+.playList {
+    position: fixed;
+    height: calc(100% - 60px - 70px - 20px);
+    width: 30%;
+    top: 70px;
+    right: 20px;
+    background: $transparentBackground;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    padding: 10px 20px;
+    backdrop-filter: saturate(180%) blur(30px);
+    z-index: 100;
+    overflow: hidden;
+    
+    .playList-action-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $textColor;
+        
+        button {
+            color: $textColor;
+        }
+    }
+    
+    .playList-list {
+        width: 100%;
+        height: calc(100% - 120px);
+        overflow: auto;
+        padding: 0 5px;
+        
+        li {
+            display: flex;
+            justify-content: space-between;
+            color: $textColor;
+            gap: 10px;
+            line-height: 35px;
+            padding: 0 5px;
+            transition: .1s;
+            
+            .name, .author {
+                cursor: pointer;
+            }
+            
+            .name {
+                flex: .5;
+            }
+            
+            .author {
+                flex: .3;
+            }
+            
+            .duration {
+                flex: .2;
+                text-align: end;
+            }
+            
+            &.active {
+                color: $subTheme;
+            }
+            
+            &:hover {
+                background: rgba(146, 158, 176, 0.52);
+            }
+        }
+    }
+}

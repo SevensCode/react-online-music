@@ -5,18 +5,21 @@ import ImgLazy from '../../../../components/ImgLazy'
 import AuthorTags from '../../../../components/AuthorTags'
 import Like from '../../../../components/Like'
 import { useDispatch } from 'react-redux'
-import { audioPause, audioPlay, setMusicInfo } from '../../../../redux/modules/global'
+import { audioPause, audioPlay, insertMusicIntoThePlaylist, setMusicInfo } from '../../../../redux/modules/global'
 import AudioStatus from '../../../../components/MusicStatus'
 
 function MusicCell({ data }) {
     const dispatch = useDispatch()
     const play = async () => {
-        dispatch(setMusicInfo({
+        const musicIofo = {
             name: data.name,
             coverPicture: data.picUrl,
             author: data.song.artists.map(item => ({ name: item.name, id: item.id })),
+            duration: data.song.duration,
             id: data.id
-        }))
+        }
+        dispatch(setMusicInfo(musicIofo))
+        dispatch(insertMusicIntoThePlaylist(musicIofo))
         dispatch(audioPlay())
     }
     return (

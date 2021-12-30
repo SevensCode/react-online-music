@@ -9,6 +9,7 @@ const darkTheme = {
     scrollColor: 'rgba(255, 255, 255, 0.5)',
     transparent: 'rgba(255, 255, 255, 0.1)',
     transparentBackground: 'rgba(36,37,38,.7)',
+    divder: 'rgba(255, 255, 255, .06)'
 }
 const lightTheme = {
     textColor: '#333333',
@@ -18,6 +19,7 @@ const lightTheme = {
     scrollColor: 'rgba(0, 0, 0, 0.5)',
     transparent: 'rgba(0, 0, 0, 0.1)',
     transparentBackground: 'rgba(255,255,255,.7)',
+    divder: 'rgba(0, 0, 0, .06)'
 }
 const { style } = document.querySelector('body')
 
